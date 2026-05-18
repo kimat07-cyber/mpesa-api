@@ -22,7 +22,9 @@ CALLBACK_URL = os.environ.get("CALLBACK_URL")
 @app.route("/")
 def home():
     return "M-Pesa STK Push API is running"
-
+@app.route("/token")
+def token():
+    return {"access_token": get_access_token()}
 
 # =========================
 # GET ACCESS TOKEN
