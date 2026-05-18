@@ -29,10 +29,18 @@ def home():
 # =========================
 def get_access_token():
     url = "https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
-    
+
     response = requests.get(url, auth=(CONSUMER_KEY, CONSUMER_SECRET))
-    
-    return response.json().get("access_token")
+
+    print("TOKEN STATUS:", response.status_code)
+    print("TOKEN RESPONSE:", response.text)
+
+    try:
+        data = response.json()
+        return data.get("access_token")
+    except Exception as e:
+        print("TOKEN ERROR:", e)
+        return None
 
 
 # =========================
@@ -58,7 +66,12 @@ def stkpush():
     if not phone or not amount:
         return jsonify({"error": "phone and amount are required"}), 400
 
+    # Get token
     access_token = get_access_token()
+
+    if not access_token:
+        return jsonify({"error": "Failed to generate access token"}), 500
+
     password, timestamp = generate_password()
 
     url = "https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
@@ -78,7 +91,7 @@ def stkpush():
         "PartyB": SHORTCODE,
         "PhoneNumber": phone,
         "CallBackURL": CALLBACK_URL,
-        "AccountReference": "MPESA-API",
+        "AccountReference": "MPESA API",
         "TransactionDesc": "Payment"
     }
 
