@@ -22,6 +22,15 @@ CALLBACK_URL = os.environ.get("CALLBACK_URL")
 @app.route("/")
 def home():
     return "M-Pesa STK Push API is running"
+@app.route("/env-check")
+def env_check():
+    return {
+        "CONSUMER_KEY_EXISTS": bool(CONSUMER_KEY),
+        "CONSUMER_SECRET_EXISTS": bool(CONSUMER_SECRET),
+        "PASSKEY_EXISTS": bool(PASSKEY),
+        "SHORTCODE": SHORTCODE,
+        "CALLBACK_URL": CALLBACK_URL
+    }
 @app.route("/token")
 def token():
     return {"access_token": get_access_token()}
@@ -55,6 +64,7 @@ def generate_password():
     return password, timestamp
 
 
+# =========================
 # =========================
 # STK PUSH ENDPOINT
 # =========================
@@ -97,10 +107,17 @@ def stkpush():
         "TransactionDesc": "Payment"
     }
 
-    response = requests.post(url, json=payload, headers=headers)
+    response = requests.post(
+        url,
+        json=payload,
+        headers=headers,
+        timeout=30
+    )
+
+    print("STK STATUS:", response.status_code)
+    print("STK RESPONSE:", response.text)
 
     return jsonify(response.json())
-
 
 # =========================
 # CALLBACK ENDPOINT
