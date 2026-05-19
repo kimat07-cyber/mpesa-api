@@ -39,8 +39,7 @@ def token():
 # GET ACCESS TOKEN
 # =========================
 def get_access_token():
-    url = "https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
-
+    url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
     response = requests.get(url, auth=(CONSUMER_KEY, CONSUMER_SECRET))
 
     print("TOKEN STATUS:", response.status_code)
@@ -86,7 +85,7 @@ def stkpush():
 
     password, timestamp = generate_password()
 
-    url = "https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
+    url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
 
     headers = {
         "Authorization": f"Bearer {access_token}",
