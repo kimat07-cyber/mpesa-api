@@ -61,6 +61,10 @@ def generate_password():
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     data = SHORTCODE + PASSKEY + timestamp
     password = base64.b64encode(data.encode()).decode("utf-8")
+
+    print("GENERATED PASSWORD:", password)
+    print("TIMESTAMP:", timestamp)
+
     return password, timestamp
 
 
