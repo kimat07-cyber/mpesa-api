@@ -78,6 +78,24 @@ def generate_password():
 
 
 # =========================
+# PHONE NORMALIZATION (NEW)
+# =========================
+def format_phone(phone):
+    phone = str(phone).strip()
+    phone = phone.replace(" ", "").replace("+", "")
+
+    # 07XXXXXXXX → 2547XXXXXXXX
+    if phone.startswith("0"):
+        phone = "254" + phone[1:]
+
+    # 7XXXXXXXX → 2547XXXXXXXX
+    if len(phone) == 9 and phone.startswith("7"):
+        phone = "254" + phone
+
+    return phone
+
+
+# =========================
 # STK PUSH ENDPOINT
 # =========================
 @app.route("/stkpush", methods=["POST"])
@@ -91,6 +109,15 @@ def stkpush():
     if not phone or not amount:
         return jsonify({
             "error": "phone and amount are required"
+        }), 400
+
+    # ✅ NORMALIZE PHONE HERE
+    phone = format_phone(phone)
+
+    # Optional safety check
+    if not phone.startswith("254") or len(phone) != 12:
+        return jsonify({
+            "error": "Invalid phone number format"
         }), 400
 
     # Get token
