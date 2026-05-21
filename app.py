@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import requests
 import base64
 from datetime import datetime
@@ -21,7 +21,9 @@ CALLBACK_URL = os.environ.get("CALLBACK_URL")
 # =========================
 @app.route("/")
 def home():
-    return "M-Pesa STK Push API is running"
+    return render_template("index.html")
+
+
 @app.route("/env-check")
 def env_check():
     return {
@@ -31,9 +33,12 @@ def env_check():
         "SHORTCODE": SHORTCODE,
         "CALLBACK_URL": CALLBACK_URL
     }
+
+
 @app.route("/token")
 def token():
     return {"access_token": get_access_token()}
+
 
 # =========================
 # GET ACCESS TOKEN
@@ -59,8 +64,12 @@ def get_access_token():
 # =========================
 def generate_password():
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+
     data = SHORTCODE + PASSKEY + timestamp
-    password = base64.b64encode(data.encode()).decode("utf-8")
+
+    password = base64.b64encode(
+        data.encode()
+    ).decode("utf-8")
 
     print("GENERATED PASSWORD:", password)
     print("TIMESTAMP:", timestamp)
@@ -69,24 +78,28 @@ def generate_password():
 
 
 # =========================
-# =========================
 # STK PUSH ENDPOINT
 # =========================
 @app.route("/stkpush", methods=["POST"])
 def stkpush():
+
     data = request.json
 
     phone = data.get("phone")
     amount = data.get("amount")
 
     if not phone or not amount:
-        return jsonify({"error": "phone and amount are required"}), 400
+        return jsonify({
+            "error": "phone and amount are required"
+        }), 400
 
     # Get token
     access_token = get_access_token()
 
     if not access_token:
-        return jsonify({"error": "Failed to generate access token"}), 500
+        return jsonify({
+            "error": "Failed to generate access token"
+        }), 500
 
     password, timestamp = generate_password()
 
@@ -98,18 +111,18 @@ def stkpush():
     }
 
     payload = {
-    "BusinessShortCode": SHORTCODE,
-    "Password": password,
-    "Timestamp": timestamp,
-    "TransactionType": "CustomerBuyGoodsOnline",
-    "Amount": amount,
-    "PartyA": phone,
-    "PartyB": "5621375",
-    "PhoneNumber": phone,
-    "CallBackURL": CALLBACK_URL,
-    "AccountReference": "MPESA API",
-    "TransactionDesc": "Payment"
-}
+        "BusinessShortCode": SHORTCODE,
+        "Password": password,
+        "Timestamp": timestamp,
+        "TransactionType": "CustomerBuyGoodsOnline",
+        "Amount": amount,
+        "PartyA": phone,
+        "PartyB": "5621375",
+        "PhoneNumber": phone,
+        "CallBackURL": CALLBACK_URL,
+        "AccountReference": "MPESA API",
+        "TransactionDesc": "Payment"
+    }
 
     response = requests.post(
         url,
@@ -123,16 +136,22 @@ def stkpush():
 
     return jsonify(response.json())
 
+
 # =========================
 # CALLBACK ENDPOINT
 # =========================
 @app.route("/callback", methods=["POST"])
 def callback():
+
     data = request.json
+
     print("🔥 CALLBACK RECEIVED:")
     print(data)
 
-    return jsonify({"ResultCode": 0, "ResultDesc": "Accepted"})
+    return jsonify({
+        "ResultCode": 0,
+        "ResultDesc": "Accepted"
+    })
 
 
 if __name__ == "__main__":
