@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>M-Pesa Payment</title>
+</head>
+<body>
+
+    <h2>Pay KES 100</h2>
+
+    <input
+        type="text"
+        id="phone"
+        placeholder="2547XXXXXXXX"
+    >
+
+    <button onclick="pay()">
+        Pay Now
+    </button>
+
+    <p id="result"></p>
+
+    <script>
+
+        async function pay() {
+
+            const phone =
+                document.getElementById("phone").value;
+
+            const response = await fetch("/stkpush", {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    phone: phone,
+                    amount: 100
+                })
+            });
+
+            const data = await response.json();
+
+            document.getElementById("result").innerText =
+                data.CustomerMessage ||
+                JSON.stringify(data);
+        }
+
+    </script>
+
+</body>
+</html>
