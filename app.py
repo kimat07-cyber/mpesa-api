@@ -98,18 +98,18 @@ def stkpush():
     }
 
     payload = {
-        "BusinessShortCode": SHORTCODE,
-        "Password": password,
-        "Timestamp": timestamp,
-        "TransactionType": "CustomerPayBillOnline",
-        "Amount": amount,
-        "PartyA": phone,
-        "PartyB": SHORTCODE,
-        "PhoneNumber": phone,
-        "CallBackURL": CALLBACK_URL,
-        "AccountReference": "MPESA API",
-        "TransactionDesc": "Payment"
-    }
+    "BusinessShortCode": SHORTCODE,
+    "Password": password,
+    "Timestamp": timestamp,
+    "TransactionType": "CustomerBuyGoodsOnline",
+    "Amount": amount,
+    "PartyA": phone,
+    "PartyB": "5621375",
+    "PhoneNumber": phone,
+    "CallBackURL": CALLBACK_URL,
+    "AccountReference": "MPESA API",
+    "TransactionDesc": "Payment"
+}
 
     response = requests.post(
         url,
