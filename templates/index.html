@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #006633 0%, #000000 50%, #990000 100%);
+            background: #87ceeb; /* Updated website background to sky blue */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,18 +17,18 @@
         }
 
         .card {
-            background: #f0f8ff; 
-            padding: 0 0 30px 0; /* Cleared top padding so the image reaches the absolute edges */
+            /* Updated card background to a gradient with Green, Black, and Red themes */
+            background: linear-gradient(135deg, #006633 0%, #000000 50%, #990000 100%);
+            padding: 0 0 30px 0; 
             border-radius: 16px;
             width: 100%;
             max-width: 480px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); 
             box-sizing: border-box;
             transition: all 0.3s ease;
-            overflow: hidden; /* Enforces the top card corner radius over the image */
+            overflow: hidden; 
         }
 
-        /* Fully responsive structural layout for your uploaded header asset */
         .header-image {
             width: 100%;
             height: 160px;
@@ -36,10 +36,9 @@
             object-position: center;
             display: block;
             margin-bottom: 20px;
-            border-bottom: 2px solid #cbdbe6;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        /* Internal content wrapper to restore proper spacing inside the card container */
         .card-content {
             padding: 0 30px;
         }
@@ -47,7 +46,7 @@
         h1 {
             font-size: 26px;
             margin: 0 0 5px 0;
-            color: #111;
+            color: #ffffff; /* White text for contrast against dark gradient */
             text-align: center;
         }
 
@@ -55,7 +54,7 @@
             margin: 0 0 25px 0;
             font-size: 14px;
             font-weight: normal;
-            color: #555;
+            color: #dddddd; /* Soft grey text */
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -65,17 +64,17 @@
             font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #777;
+            color: #bbbbbb; 
             margin: 20px 0 10px 0;
             padding-bottom: 5px;
-            border-bottom: 1px solid #d0e2f0; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
             font-weight: bold;
         }
 
         label {
             font-size: 13px;
             font-weight: bold;
-            color: #333;
+            color: #ffffff; /* White labels for high legibility */
             display: block;
             margin-top: 12px;
         }
@@ -84,7 +83,7 @@
             width: 100%;
             padding: 12px;
             margin: 6px 0 12px 0;
-            border: 1px solid #b0c4de; 
+            border: 1px solid #ccc; 
             border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
@@ -92,14 +91,14 @@
         }
 
         input:focus {
-            border-color: #006633;
+            border-color: #fdd835; /* Yellow focus border highlights the Kenyan theme elements */
             outline: none;
-            box-shadow: 0 0 5px rgba(0, 102, 51, 0.2);
+            box-shadow: 0 0 5px rgba(253, 216, 53, 0.5);
         }
 
         .aesthetic-input {
-            border: 1px solid #b0c4de;
-            background-color: #f9fbfd; 
+            border: 1px solid #ddd;
+            background-color: #fdfdfd; 
         }
 
         .candidate-container {
@@ -110,7 +109,7 @@
 
         .candidate-card {
             flex: 1;
-            border: 2px solid #cbdbe6;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 12px;
             padding: 15px;
             text-align: center;
@@ -129,35 +128,35 @@
         }
 
         .card-wantam {
-            color: #2e7d32;
-            background-color: #f4fbf5;
+            color: #4ade80; /* Bright green text for dark theme visibility */
+            background-color: rgba(0, 102, 51, 0.4);
         }
 
         .card-wantam:hover {
-            border-color: #2e7d32;
+            border-color: #4ade80;
         }
 
         .candidate-card.selected-wantam {
-            border-color: #2e7d32;
+            border-color: #4ade80;
             background-color: #2e7d32;
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.5);
         }
 
         .card-tutam {
-            color: #b79500;
-            background-color: #fffdf0;
+            color: #fde047; /* Bright yellow text */
+            background-color: rgba(183, 149, 0, 0.2);
         }
 
         .card-tutam:hover {
-            border-color: #fdd835;
+            border-color: #fde047;
         }
 
         .candidate-card.selected-tutam {
             border-color: #fdd835;
             background-color: #fdd835;
             color: #000000;
-            box-shadow: 0 4px 12px rgba(253, 216, 53, 0.3);
+            box-shadow: 0 4px 12px rgba(253, 216, 53, 0.5);
         }
 
         .candidate-name {
@@ -169,7 +168,7 @@
         .candidate-party {
             font-size: 11px;
             text-transform: uppercase;
-            opacity: 0.8;
+            opacity: 0.9;
             display: block;
         }
 
@@ -179,7 +178,7 @@
             margin: 15px 0;
             cursor: pointer;
             font-size: 13px;
-            color: #444;
+            color: #eeeeee; /* Light text for readability */
             line-height: 1.4;
         }
 
@@ -190,21 +189,21 @@
         }
 
         .fee-display {
-            background-color: #e6f4ea;
+            background-color: rgba(255, 255, 255, 0.1);
             padding: 12px;
             border-radius: 8px;
-            border: 1px dashed #006633;
+            border: 1px dashed #ffffff;
             text-align: center;
             font-weight: bold;
-            color: #006633;
+            color: #ffffff;
             margin: 15px 0;
         }
 
         button {
             width: 100%;
             padding: 14px;
-            background: #000000;
-            color: white;
+            background: #ffffff; /* Contrast white button against the dark card layout */
+            color: #000000;
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -215,13 +214,13 @@
         }
 
         button:hover {
-            background: #006633;
+            background: #fdd835; /* Yellow glow hover state */
         }
 
         button:disabled {
-            background: #a9bdcc;
+            background: rgba(255, 255, 255, 0.3);
             cursor: not-allowed;
-            color: #666;
+            color: #888888;
         }
 
         .error-msg {
@@ -229,7 +228,7 @@
             font-size: 14px;
             font-weight: bold;
             text-align: center;
-            color: red;
+            color: #ff4d4d; /* Bright red error color */
         }
 
         .hidden {
@@ -244,8 +243,8 @@
         .spinner {
             width: 50px;
             height: 50px;
-            border: 5px solid #d0e2f0;
-            border-top: 5px solid #006633;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-top: 5px solid #ffffff;
             border-radius: 50%;
             margin: 20px auto;
             animation: spin 1s linear infinite;
@@ -258,14 +257,14 @@
 
         .status-title {
             font-size: 20px;
-            color: #2e7d32;
+            color: #4ade80;
             margin-bottom: 10px;
             font-weight: bold;
         }
 
         .status-desc {
             font-size: 14px;
-            color: #333;
+            color: #ffffff;
             line-height: 1.5;
         }
     </style>
@@ -273,10 +272,8 @@
 <body>
 
 <div class="card" id="pollCard">
-    <!-- Embedded Header Image Asset -->
     <img src="5trf.png" alt="Header Banner" class="header-image">
 
-    <!-- Wrapped Card Elements -->
     <div class="card-content">
         <div id="formView">
             <h1>WANTAM vs TUTAM</h1>
@@ -329,16 +326,3 @@
                 An STK Push message has been dispatched to your phone.<br><br>
                 Please <strong>enter your M-Pesa PIN</strong> to securely complete your payment of KES 10 and submit your official vote to the system dashboard.
             </div>
-        </div>
-    </div>
-</div>
-
-<script>
-let selectedVote = "";
-
-function selectCandidate(candidate) {
-    selectedVote = candidate;
-    const wantam = document.getElementById("labelWantam");
-    const tutam = document.getElementById("labelTutam");
-    
-    if (candidate === "WANTAM") {
