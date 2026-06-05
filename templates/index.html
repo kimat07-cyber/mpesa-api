@@ -17,14 +17,31 @@
         }
 
         .card {
-            background: #f0f8ff; /* Updated card container color from white to light blue */
-            padding: 30px;
+            background: #f0f8ff; 
+            padding: 0 0 30px 0; /* Cleared top padding so the image reaches the absolute edges */
             border-radius: 16px;
             width: 100%;
             max-width: 480px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); /* Slightly deepened shadow contrast */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
             box-sizing: border-box;
             transition: all 0.3s ease;
+            overflow: hidden; /* Enforces the top card corner radius over the image */
+        }
+
+        /* Fully responsive structural layout for your uploaded header asset */
+        .header-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #cbdbe6;
+        }
+
+        /* Internal content wrapper to restore proper spacing inside the card container */
+        .card-content {
+            padding: 0 30px;
         }
 
         h1 {
@@ -51,7 +68,7 @@
             color: #777;
             margin: 20px 0 10px 0;
             padding-bottom: 5px;
-            border-bottom: 1px solid #d0e2f0; /* Color matched to light blue theme */
+            border-bottom: 1px solid #d0e2f0; 
             font-weight: bold;
         }
 
@@ -67,7 +84,7 @@
             width: 100%;
             padding: 12px;
             margin: 6px 0 12px 0;
-            border: 1px solid #b0c4de; /* Softer blue-grey borders */
+            border: 1px solid #b0c4de; 
             border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
@@ -82,7 +99,7 @@
 
         .aesthetic-input {
             border: 1px solid #b0c4de;
-            background-color: #f9fbfd; /* Clean white-blue input tint */
+            background-color: #f9fbfd; 
         }
 
         .candidate-container {
@@ -221,7 +238,7 @@
 
         .success-state {
             text-align: center;
-            padding: 20px 0;
+            padding: 20px 30px;
         }
 
         .spinner {
@@ -256,56 +273,62 @@
 <body>
 
 <div class="card" id="pollCard">
-    <div id="formView">
-        <h1>WANTAM vs TUTAM</h1>
-        <h2>Uko Wantam ama Tutam?</h2>
-        
-        <div class="section-title">1. Chagua Kura Yako</div>
-        
-        <div class="candidate-container">
-            <label class="candidate-card card-wantam" id="labelWantam">
-                <input type="radio" name="candidate" value="WANTAM" onclick="selectCandidate('WANTAM')">
-                <span class="candidate-name">WANTAM</span>
-                <span class="candidate-party">Green Team</span>
-            </label>
+    <!-- Embedded Header Image Asset -->
+    <img src="5trf.png" alt="Header Banner" class="header-image">
+
+    <!-- Wrapped Card Elements -->
+    <div class="card-content">
+        <div id="formView">
+            <h1>WANTAM vs TUTAM</h1>
+            <h2>Uko Wantam ama Tutam?</h2>
             
-            <label class="candidate-card card-tutam" id="labelTutam">
-                <input type="radio" name="candidate" value="TUTAM" onclick="selectCandidate('TUTAM')">
-                <span class="candidate-name">TUTAM</span>
-                <span class="candidate-party">Yellow Team</span>
+            <div class="section-title">1. Chagua Kura Yako</div>
+            
+            <div class="candidate-container">
+                <label class="candidate-card card-wantam" id="labelWantam">
+                    <input type="radio" name="candidate" value="WANTAM" onclick="selectCandidate('WANTAM')">
+                    <span class="candidate-name">WANTAM</span>
+                    <span class="candidate-party">Green Team</span>
+                </label>
+                
+                <label class="candidate-card card-tutam" id="labelTutam">
+                    <input type="radio" name="candidate" value="TUTAM" onclick="selectCandidate('TUTAM')">
+                    <span class="candidate-name">TUTAM</span>
+                    <span class="candidate-party">Yellow Team</span>
+                </label>
+            </div>
+
+            <label for="aestheticName">Your Name (Optional)</label>
+            <input type="text" id="aestheticName" class="aesthetic-input" placeholder="Type your name here...">
+
+            <label for="aestheticCounty">County</label>
+            <input type="text" id="aestheticCounty" class="aesthetic-input" placeholder="e.g., Nairobi, Mombasa...">
+
+            <div class="section-title">2. M-Pesa Checkout Details</div>
+
+            <label for="phone">Safaricom Phone Number</label>
+            <input type="tel" id="phone" placeholder="e.g. 0712345678">
+            
+            <label class="checkbox-container">
+                <input type="checkbox" id="privacyCheck" onclick="toggleVoteButton()">
+                Ninakubali Masharti na Vigezo. I agree to the privacy statement and consent to processing my mobile money details to cast this vote.
             </label>
+
+            <div class="fee-display">
+                Gharama ya Kupiga Kura: KES 10
+            </div>
+
+            <button id="voteBtn" onclick="payAndVote()" disabled>Cast Vote (KES 10)</button>
+            <div class="error-msg" id="errorMsg"></div>
         </div>
 
-        <label for="aestheticName">Your Name (Optional)</label>
-        <input type="text" id="aestheticName" class="aesthetic-input" placeholder="Type your name here...">
-
-        <label for="aestheticCounty">County</label>
-        <input type="text" id="aestheticCounty" class="aesthetic-input" placeholder="e.g., Nairobi, Mombasa...">
-
-        <div class="section-title">2. M-Pesa Checkout Details</div>
-
-        <label for="phone">Safaricom Phone Number</label>
-        <input type="tel" id="phone" placeholder="e.g. 0712345678">
-        
-        <label class="checkbox-container">
-            <input type="checkbox" id="privacyCheck" onclick="toggleVoteButton()">
-            Ninakubali Masharti na Vigezo. I agree to the privacy statement and consent to processing my mobile money details to cast this vote.
-        </label>
-
-        <div class="fee-display">
-            Gharama ya Kupiga Kura: KES 10
-        </div>
-
-        <button id="voteBtn" onclick="payAndVote()" disabled>Cast Vote (KES 10)</button>
-        <div class="error-msg" id="errorMsg"></div>
-    </div>
-
-    <div id="successView" class="hidden success-state">
-        <div class="spinner"></div>
-        <div class="status-title">📲 Angalia Simu Yako!</div>
-        <div class="status-desc">
-            An STK Push message has been dispatched to your phone.<br><br>
-            Please <strong>enter your M-Pesa PIN</strong> to securely complete your payment of KES 10 and submit your official vote to the system dashboard.
+        <div id="successView" class="hidden success-state">
+            <div class="spinner"></div>
+            <div class="status-title">📲 Angalia Simu Yako!</div>
+            <div class="status-desc">
+                An STK Push message has been dispatched to your phone.<br><br>
+                Please <strong>enter your M-Pesa PIN</strong> to securely complete your payment of KES 10 and submit your official vote to the system dashboard.
+            </div>
         </div>
     </div>
 </div>
@@ -319,28 +342,3 @@ function selectCandidate(candidate) {
     const tutam = document.getElementById("labelTutam");
     
     if (candidate === "WANTAM") {
-        wantam.className = "candidate-card card-wantam selected-wantam";
-        tutam.className = "candidate-card card-tutam";
-    } else {
-        tutam.className = "candidate-card card-tutam selected-tutam";
-        wantam.className = "candidate-card card-wantam";
-    }
-}
-
-function toggleVoteButton() {
-    const isChecked = document.getElementById("privacyCheck").checked;
-    document.getElementById("voteBtn").disabled = !isChecked;
-}
-
-function validateAndFormatPhone(phone) {
-    phone = phone.trim().replace(/\s+/g, '');
-    if (phone.startsWith("0")) {
-        phone = "254" + phone.substring(1);
-    } else if (phone.startsWith("+254")) {
-        phone = phone.substring(1);
-    }
-    const safaricomRegex = /^(254)(7[0-1-2-4-5-6-9]|1[1-2-3-4-5])\d{7}$/;
-    return safaricomRegex.test(phone) ? phone : null;
-}
-
-async function payAndVote() {
