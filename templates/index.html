@@ -17,12 +17,12 @@
         }
 
         .card {
-            background: #ffffff;
+            background: #f0f8ff; /* Updated card container color from white to light blue */
             padding: 30px;
             border-radius: 16px;
             width: 100%;
             max-width: 480px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); /* Slightly deepened shadow contrast */
             box-sizing: border-box;
             transition: all 0.3s ease;
         }
@@ -38,7 +38,7 @@
             margin: 0 0 25px 0;
             font-size: 14px;
             font-weight: normal;
-            color: #666;
+            color: #555;
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -48,17 +48,17 @@
             font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #888;
+            color: #777;
             margin: 20px 0 10px 0;
             padding-bottom: 5px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #d0e2f0; /* Color matched to light blue theme */
             font-weight: bold;
         }
 
         label {
             font-size: 13px;
             font-weight: bold;
-            color: #444;
+            color: #333;
             display: block;
             margin-top: 12px;
         }
@@ -67,10 +67,11 @@
             width: 100%;
             padding: 12px;
             margin: 6px 0 12px 0;
-            border: 1px solid #ccc;
+            border: 1px solid #b0c4de; /* Softer blue-grey borders */
             border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
+            background-color: #ffffff;
         }
 
         input:focus {
@@ -80,11 +81,10 @@
         }
 
         .aesthetic-input {
-            border: 1px solid #dcdcdc;
-            background-color: #fafafa;
+            border: 1px solid #b0c4de;
+            background-color: #f9fbfd; /* Clean white-blue input tint */
         }
 
-        /* 3. Visual Radio Cards for Candidates */
         .candidate-container {
             display: flex;
             gap: 15px;
@@ -93,7 +93,7 @@
 
         .candidate-card {
             flex: 1;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #cbdbe6;
             border-radius: 12px;
             padding: 15px;
             text-align: center;
@@ -156,14 +156,13 @@
             display: block;
         }
 
-        /* 5. Privacy Policy Checkbox */
         .checkbox-container {
             display: flex;
             align-items: flex-start;
             margin: 15px 0;
             cursor: pointer;
             font-size: 13px;
-            color: #555;
+            color: #444;
             line-height: 1.4;
         }
 
@@ -174,7 +173,7 @@
         }
 
         .fee-display {
-            background-color: #f4fbf7;
+            background-color: #e6f4ea;
             padding: 12px;
             border-radius: 8px;
             border: 1px dashed #006633;
@@ -203,8 +202,9 @@
         }
 
         button:disabled {
-            background: #cccccc;
+            background: #a9bdcc;
             cursor: not-allowed;
+            color: #666;
         }
 
         .error-msg {
@@ -215,7 +215,6 @@
             color: red;
         }
 
-        /* 4. Dynamic Loading Success UI state */
         .hidden {
             display: none !important;
         }
@@ -228,7 +227,7 @@
         .spinner {
             width: 50px;
             height: 50px;
-            border: 5px solid #f3f3f3;
+            border: 5px solid #d0e2f0;
             border-top: 5px solid #006633;
             border-radius: 50%;
             margin: 20px auto;
@@ -249,7 +248,7 @@
 
         .status-desc {
             font-size: 14px;
-            color: #555;
+            color: #333;
             line-height: 1.5;
         }
     </style>
@@ -257,15 +256,12 @@
 <body>
 
 <div class="card" id="pollCard">
-    <!-- Active Voting View -->
     <div id="formView">
         <h1>WANTAM vs TUTAM</h1>
         <h2>Uko Wantam ama Tutam?</h2>
         
-        <!-- 1. Sectioned Layout: Voter Selection Information -->
         <div class="section-title">1. Chagua Kura Yako</div>
         
-        <!-- 3. Candidate Cards instead of Dropdown -->
         <div class="candidate-container">
             <label class="candidate-card card-wantam" id="labelWantam">
                 <input type="radio" name="candidate" value="WANTAM" onclick="selectCandidate('WANTAM')">
@@ -286,13 +282,11 @@
         <label for="aestheticCounty">County</label>
         <input type="text" id="aestheticCounty" class="aesthetic-input" placeholder="e.g., Nairobi, Mombasa...">
 
-        <!-- 1. Sectioned Layout: Dedicated M-Pesa Checkout Area -->
         <div class="section-title">2. M-Pesa Checkout Details</div>
 
         <label for="phone">Safaricom Phone Number</label>
         <input type="tel" id="phone" placeholder="e.g. 0712345678">
         
-        <!-- 5. Essential Privacy Policy Agreement Checkbox -->
         <label class="checkbox-container">
             <input type="checkbox" id="privacyCheck" onclick="toggleVoteButton()">
             Ninakubali Masharti na Vigezo. I agree to the privacy statement and consent to processing my mobile money details to cast this vote.
@@ -306,12 +300,11 @@
         <div class="error-msg" id="errorMsg"></div>
     </div>
 
-    <!-- 4. Dynamic Pending/Success Verification Layout -->
     <div id="successView" class="hidden success-state">
         <div class="spinner"></div>
         <div class="status-title">📲 Angalia Simu Yako!</div>
         <div class="status-desc">
-            An STK Push push message has been dispatched to your phone.<br><br>
+            An STK Push message has been dispatched to your phone.<br><br>
             Please <strong>enter your M-Pesa PIN</strong> to securely complete your payment of KES 10 and submit your official vote to the system dashboard.
         </div>
     </div>
@@ -320,7 +313,6 @@
 <script>
 let selectedVote = "";
 
-// 3. Selection highlighters for visual cards
 function selectCandidate(candidate) {
     selectedVote = candidate;
     const wantam = document.getElementById("labelWantam");
@@ -335,7 +327,6 @@ function selectCandidate(candidate) {
     }
 }
 
-// 5. Button toggle verification
 function toggleVoteButton() {
     const isChecked = document.getElementById("privacyCheck").checked;
     document.getElementById("voteBtn").disabled = !isChecked;
@@ -343,3 +334,13 @@ function toggleVoteButton() {
 
 function validateAndFormatPhone(phone) {
     phone = phone.trim().replace(/\s+/g, '');
+    if (phone.startsWith("0")) {
+        phone = "254" + phone.substring(1);
+    } else if (phone.startsWith("+254")) {
+        phone = phone.substring(1);
+    }
+    const safaricomRegex = /^(254)(7[0-1-2-4-5-6-9]|1[1-2-3-4-5])\d{7}$/;
+    return safaricomRegex.test(phone) ? phone : null;
+}
+
+async function payAndVote() {
