@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #87ceeb; /* Updated website background to sky blue */
+            background: #87ceeb; /* Sky blue website background */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,7 +17,7 @@
         }
 
         .card {
-            /* Updated card background to a gradient with Green, Black, and Red themes */
+            /* Card background gradient using Green, Black, and Red themes */
             background: linear-gradient(135deg, #006633 0%, #000000 50%, #990000 100%);
             padding: 0 0 30px 0; 
             border-radius: 16px;
@@ -46,7 +46,7 @@
         h1 {
             font-size: 26px;
             margin: 0 0 5px 0;
-            color: #ffffff; /* White text for contrast against dark gradient */
+            color: #ffffff; 
             text-align: center;
         }
 
@@ -54,7 +54,7 @@
             margin: 0 0 25px 0;
             font-size: 14px;
             font-weight: normal;
-            color: #dddddd; /* Soft grey text */
+            color: #dddddd; 
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -74,7 +74,7 @@
         label {
             font-size: 13px;
             font-weight: bold;
-            color: #ffffff; /* White labels for high legibility */
+            color: #ffffff; 
             display: block;
             margin-top: 12px;
         }
@@ -91,7 +91,7 @@
         }
 
         input:focus {
-            border-color: #fdd835; /* Yellow focus border highlights the Kenyan theme elements */
+            border-color: #fdd835; 
             outline: none;
             box-shadow: 0 0 5px rgba(253, 216, 53, 0.5);
         }
@@ -128,7 +128,7 @@
         }
 
         .card-wantam {
-            color: #4ade80; /* Bright green text for dark theme visibility */
+            color: #4ade80; 
             background-color: rgba(0, 102, 51, 0.4);
         }
 
@@ -144,7 +144,7 @@
         }
 
         .card-tutam {
-            color: #fde047; /* Bright yellow text */
+            color: #fde047; 
             background-color: rgba(183, 149, 0, 0.2);
         }
 
@@ -178,7 +178,7 @@
             margin: 15px 0;
             cursor: pointer;
             font-size: 13px;
-            color: #eeeeee; /* Light text for readability */
+            color: #eeeeee; 
             line-height: 1.4;
         }
 
@@ -202,7 +202,7 @@
         button {
             width: 100%;
             padding: 14px;
-            background: #ffffff; /* Contrast white button against the dark card layout */
+            background: #ffffff; 
             color: #000000;
             border: none;
             border-radius: 8px;
@@ -214,7 +214,7 @@
         }
 
         button:hover {
-            background: #fdd835; /* Yellow glow hover state */
+            background: #fdd835; 
         }
 
         button:disabled {
@@ -228,7 +228,7 @@
             font-size: 14px;
             font-weight: bold;
             text-align: center;
-            color: #ff4d4d; /* Bright red error color */
+            color: #ff4d4d; 
         }
 
         .hidden {
@@ -272,7 +272,8 @@
 <body>
 
 <div class="card" id="pollCard">
-    <img src="5trf.png" alt="Header Banner" class="header-image">
+    <!-- Corrected Raw Direct Link for your repository image path -->
+    <img src="https://githubusercontent.com" alt="Header Banner" class="header-image">
 
     <div class="card-content">
         <div id="formView">
@@ -326,3 +327,15 @@
                 An STK Push message has been dispatched to your phone.<br><br>
                 Please <strong>enter your M-Pesa PIN</strong> to securely complete your payment of KES 10 and submit your official vote to the system dashboard.
             </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let selectedVote = "";
+
+function selectCandidate(candidate) {
+    selectedVote = candidate;
+    const wantam = document.getElementById("labelWantam");
+    const tutam = document.getElementById("labelTutam");
+    
