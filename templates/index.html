@@ -1,55 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chat Na Wazungu Lonely  Ulipwe Leo</title>
-
+    <title>Uta-vote nani 2027?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #4a0525; /* Very deep dark pink/berry background */
+            background: linear-gradient(135deg, #006633 0%, #000000 50%, #990000 100%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
             box-sizing: border-box;
         }
 
         .card {
             background: #ffffff;
             padding: 30px;
-            border-radius: 12px;
-            width: 75vw;
-            max-width: 500px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth on dark background */
+            border-radius: 16px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             box-sizing: border-box;
+            transition: all 0.3s ease;
         }
 
         h1 {
-            font-size: 24px;
-            margin-bottom: 5px;
-            color: #222;
+            font-size: 26px;
+            margin: 0 0 5px 0;
+            color: #111;
             text-align: center;
         }
 
         h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 15px;
+            margin: 0 0 25px 0;
+            font-size: 14px;
             font-weight: normal;
-            color: #555;
+            color: #666;
             text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #888;
+            margin: 20px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            font-weight: bold;
         }
 
         label {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             color: #444;
             display: block;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
-        input, select {
+        input {
             width: 100%;
             padding: 12px;
             margin: 6px 0 12px 0;
@@ -59,26 +73,121 @@
             box-sizing: border-box;
         }
 
-        input:focus, select:focus {
-            border-color: #ba1a63; /* Dark pink focus border */
+        input:focus {
+            border-color: #006633;
             outline: none;
+            box-shadow: 0 0 5px rgba(0, 102, 51, 0.2);
+        }
+
+        .aesthetic-input {
+            border: 1px solid #dcdcdc;
+            background-color: #fafafa;
+        }
+
+        /* 3. Visual Radio Cards for Candidates */
+        .candidate-container {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0 20px 0;
+        }
+
+        .candidate-card {
+            flex: 1;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+
+        .candidate-card input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+            margin: 0;
+        }
+
+        .card-wantam {
+            color: #2e7d32;
+            background-color: #f4fbf5;
+        }
+
+        .card-wantam:hover {
+            border-color: #2e7d32;
+        }
+
+        .candidate-card.selected-wantam {
+            border-color: #2e7d32;
+            background-color: #2e7d32;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+        }
+
+        .card-tutam {
+            color: #b79500;
+            background-color: #fffdf0;
+        }
+
+        .card-tutam:hover {
+            border-color: #fdd835;
+        }
+
+        .candidate-card.selected-tutam {
+            border-color: #fdd835;
+            background-color: #fdd835;
+            color: #000000;
+            box-shadow: 0 4px 12px rgba(253, 216, 53, 0.3);
+        }
+
+        .candidate-name {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .candidate-party {
+            font-size: 11px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            display: block;
+        }
+
+        /* 5. Privacy Policy Checkbox */
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            cursor: pointer;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        .checkbox-container input {
+            width: auto;
+            margin: 3px 10px 0 0;
+            flex-shrink: 0;
         }
 
         .fee-display {
-            background-color: #fff0f5; /* Light lavender blush background */
+            background-color: #f4fbf7;
             padding: 12px;
             border-radius: 8px;
-            border: 1px dashed #ba1a63; /* Dark pink dashed border */
+            border: 1px dashed #006633;
             text-align: center;
             font-weight: bold;
-            color: #ba1a63; /* Dark pink text */
+            color: #006633;
             margin: 15px 0;
         }
 
         button {
             width: 100%;
             padding: 14px;
-            background: #ba1a63; /* Primary dark pink button */
+            background: #000000;
             color: white;
             border: none;
             border-radius: 8px;
@@ -86,144 +195,151 @@
             font-size: 16px;
             font-weight: bold;
             box-sizing: border-box;
-            margin-top: 10px;
+            transition: background 0.3s ease;
         }
 
         button:hover {
-            background: #8e104a; /* Deeper pink on hover */
+            background: #006633;
         }
 
-        .msg {
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .error-msg {
             margin-top: 15px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             text-align: center;
+            color: red;
+        }
+
+        /* 4. Dynamic Loading Success UI state */
+        .hidden {
+            display: none !important;
+        }
+
+        .success-state {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #006633;
+            border-radius: 50%;
+            margin: 20px auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-title {
+            font-size: 20px;
+            color: #2e7d32;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .status-desc {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h1>Chat Na Wazungu Lonely Ulipwe Leo</h1>
-    <h2>Ni Rahisis! Jiandikishe to activate your account</h2>
-    
-    <!-- User Details Section -->
-    <label for="fullName">Full Name</label>
-    <input type="text" id="fullName" placeholder="Enter your full name">
+<div class="card" id="pollCard">
+    <!-- Active Voting View -->
+    <div id="formView">
+        <h1>WANTAM vs TUTAM</h1>
+        <h2>Uko Wantam ama Tutam?</h2>
+        
+        <!-- 1. Sectioned Layout: Voter Selection Information -->
+        <div class="section-title">1. Chagua Kura Yako</div>
+        
+        <!-- 3. Candidate Cards instead of Dropdown -->
+        <div class="candidate-container">
+            <label class="candidate-card card-wantam" id="labelWantam">
+                <input type="radio" name="candidate" value="WANTAM" onclick="selectCandidate('WANTAM')">
+                <span class="candidate-name">WANTAM</span>
+                <span class="candidate-party">Green Team</span>
+            </label>
+            
+            <label class="candidate-card card-tutam" id="labelTutam">
+                <input type="radio" name="candidate" value="TUTAM" onclick="selectCandidate('TUTAM')">
+                <span class="candidate-name">TUTAM</span>
+                <span class="candidate-party">Yellow Team</span>
+            </label>
+        </div>
 
-    <label for="age">Age</label>
-    <input type="number" id="age" min="18" max="100" placeholder="Enter your age">
+        <label for="aestheticName">Your Name (Optional)</label>
+        <input type="text" id="aestheticName" class="aesthetic-input" placeholder="Type your name here...">
 
-    <label for="country">Country</label>
-    <select id="country">
-        <option value="">Select your country</option>
-        <option value="Kenya">Kenya</option>
-        <option value="Uganda">Uganda</option>
-        <option value="Tanzania">Tanzania</option>
-        <option value="Other">Other</option>
-    </select>
+        <label for="aestheticCounty">County</label>
+        <input type="text" id="aestheticCounty" class="aesthetic-input" placeholder="e.g., Nairobi, Mombasa...">
 
-    <label for="phone">Safaricom Phone Number</label>
-    <input type="tel" id="phone" placeholder="e.g. 0712345678">
-    
-    <!-- Fixed Activation Fee Display -->
-    <div class="fee-display">
-        One-Time Activation Fee: KES 100
+        <!-- 1. Sectioned Layout: Dedicated M-Pesa Checkout Area -->
+        <div class="section-title">2. M-Pesa Checkout Details</div>
+
+        <label for="phone">Safaricom Phone Number</label>
+        <input type="tel" id="phone" placeholder="e.g. 0712345678">
+        
+        <!-- 5. Essential Privacy Policy Agreement Checkbox -->
+        <label class="checkbox-container">
+            <input type="checkbox" id="privacyCheck" onclick="toggleVoteButton()">
+            Ninakubali Masharti na Vigezo. I agree to the privacy statement and consent to processing my mobile money details to cast this vote.
+        </label>
+
+        <div class="fee-display">
+            Gharama ya Kupiga Kura: KES 10
+        </div>
+
+        <button id="voteBtn" onclick="payAndVote()" disabled>Cast Vote (KES 10)</button>
+        <div class="error-msg" id="errorMsg"></div>
     </div>
 
-    <button onclick="payAndRegister()">Pay & Register</button>
-
-    <div class="msg" id="msg"></div>
+    <!-- 4. Dynamic Pending/Success Verification Layout -->
+    <div id="successView" class="hidden success-state">
+        <div class="spinner"></div>
+        <div class="status-title">📲 Angalia Simu Yako!</div>
+        <div class="status-desc">
+            An STK Push push message has been dispatched to your phone.<br><br>
+            Please <strong>enter your M-Pesa PIN</strong> to securely complete your payment of KES 10 and submit your official vote to the system dashboard.
+        </div>
+    </div>
 </div>
 
 <script>
+let selectedVote = "";
+
+// 3. Selection highlighters for visual cards
+function selectCandidate(candidate) {
+    selectedVote = candidate;
+    const wantam = document.getElementById("labelWantam");
+    const tutam = document.getElementById("labelTutam");
+    
+    if (candidate === "WANTAM") {
+        wantam.className = "candidate-card card-wantam selected-wantam";
+        tutam.className = "candidate-card card-tutam";
+    } else {
+        tutam.className = "candidate-card card-tutam selected-tutam";
+        wantam.className = "candidate-card card-wantam";
+    }
+}
+
+// 5. Button toggle verification
+function toggleVoteButton() {
+    const isChecked = document.getElementById("privacyCheck").checked;
+    document.getElementById("voteBtn").disabled = !isChecked;
+}
+
 function validateAndFormatPhone(phone) {
     phone = phone.trim().replace(/\s+/g, '');
-
-    if (phone.startsWith("0")) {
-        phone = "254" + phone.substring(1);
-    } else if (phone.startsWith("+254")) {
-        phone = phone.substring(1);
-    }
-
-    const safaricomRegex = /^(254)(7[0-1-2-4-5-6-9]|1[1-2-3-4-5])\d{7}$/;
-    return safaricomRegex.test(phone) ? phone : null;
-}
-
-async function payAndRegister() {
-    let fullName = document.getElementById("fullName").value.trim();
-    let age = document.getElementById("age").value;
-    let country = document.getElementById("country").value;
-    let phoneInput = document.getElementById("phone").value;
-    let msg = document.getElementById("msg");
-    
-    const fixedAmount = 100; // Enforced programmatic fee
-
-    msg.style.color = "initial";
-    msg.innerText = "";
-
-    // 1. Input Validation
-    if (!fullName) {
-        msg.style.color = "red";
-        msg.innerText = "❌ Please enter your full name.";
-        return;
-    }
-
-    if (!age || age < 18) {
-        msg.style.color = "red";
-        msg.innerText = "❌ You must be 18 years or older to register.";
-        return;
-    }
-
-    if (!country) {
-        msg.style.color = "red";
-        msg.innerText = "❌ Please select your country.";
-        return;
-    }
-
-    let phone = validateAndFormatPhone(phoneInput);
-    if (!phone) {
-        msg.style.color = "red";
-        msg.innerText = "❌ Please enter a valid Safaricom phone number.";
-        return;
-    }
-
-    msg.style.color = "#333";
-    msg.innerText = "📲 Sending STK request to your phone...";
-
-    try {
-        let res = await fetch("/stkpush", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                phone: phone,
-                amount: fixedAmount,
-                metadata: {
-                    fullName: fullName,
-                    age: age,
-                    country: country
-                }
-            })
-        });
-
-        let data = await res.json();
-
-        if (data.ResponseCode === "0") {
-            msg.style.color = "green";
-            msg.innerText = "✅ STK push sent! Check your phone to complete registration.";
-        } else {
-            msg.style.color = "red";
-            msg.innerText = "❌ Request failed. Please try again.";
-        }
-
-    } catch (err) {
-        msg.style.color = "red";
-        msg.innerText = "⚠️ Server connection error. Try again.";
-    }
-}
-</script>
-
-</body>
-</html>
